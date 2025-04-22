@@ -30,6 +30,7 @@ async function loadRestaurants() {
             const zipcode = cols[2].replace(/"/g, '').trim();
             const lat = parseFloat(cols[3]);
             const lon = parseFloat(cols[4]);
+            const street = cols[5]?.replace(/"/g, "").trim();            
 
             if (zipcode && !isNaN(lat) && !isNaN(lon) && lat !== 0 && lon !== 0) {
                 geojson.features.push({
@@ -40,8 +41,9 @@ async function loadRestaurants() {
                     },
                     properties: {
                         title: dba,
-                        zipcode: zipcode
-                    }
+                        zipcode: zipcode,
+                        street: street
+                    }                    
                 });
             }
         });
@@ -160,7 +162,7 @@ searchInput.addEventListener('input', function (e) {
 
     matches.forEach(match => {
         const div = document.createElement('div');
-        div.textContent = `${match.properties.title} (${match.properties.zipcode})`;
+        div.textContent = `${match.properties.title} — ${match.properties.street} (${match.properties.zipcode})`;
         div.style.padding = '6px 10px';
         div.style.cursor = 'pointer';
         div.style.borderBottom = '1px solid #eee';
@@ -173,7 +175,7 @@ searchInput.addEventListener('input', function (e) {
 
             new mapboxgl.Popup()
                 .setLngLat(coords)
-                .setHTML(`<strong>${name}</strong>`)
+                .setHTML(`<strong>${title}</strong><br/>${street}<br/>${zipcode}`)
                 .addTo(map);
 
             suggestionBox.style.display = 'none';
