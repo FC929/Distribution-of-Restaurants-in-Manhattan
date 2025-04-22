@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manhattan Restaurants Map</title>
+    <link rel="stylesheet" href="style.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+</head>
+<div style="position: absolute; bottom: 10px; right: 10px; z-index: 1; background-color: rgba(255, 255, 255, 0.95); padding: 14px 18px; border-radius: 10px; width: 85px; font-size: 13px; line-height: 1.8; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+    <div style="display: flex; align-items: center;">
+        <span style="width: 16px; height: 16px; background-color: #c8f0ea; border-radius: 50%; margin-right: 8px;"></span>
+        1 – 49
+    </div>
+    <div style="display: flex; align-items: center;">
+        <span style="width: 16px; height: 16px; background-color: #b4e3c0; border-radius: 50%; margin-right: 8px;"></span>
+        50 – 149
+    </div>
+    <div style="display: flex; align-items: center;">
+        <span style="width: 16px; height: 16px; background-color: #ffe2a0; border-radius: 50%; margin-right: 8px;"></span>
+        150 – 299
+    </div>
+    <div style="display: flex; align-items: center;">
+        <span style="width: 16px; height: 16px; background-color: #ffc07c; border-radius: 50%; margin-right: 8px;"></span>
+        300 – 549
+    </div>
+    <div style="display: flex; align-items: center;">
+        <span style="width: 16px; height: 16px; background-color: #ff8c7a; border-radius: 50%; margin-right: 8px;"></span>
+        550 – 849
+    </div>
+    <div style="display: flex; align-items: center;">
+        <span style="width: 16px; height: 16px; background-color: #ff4b9a; border-radius: 50%; margin-right: 8px;"></span>
+        850 – 1200
+    </div>
+</div>
+<div style="position: absolute; top: 10px; right: 10px; z-index: 1; background-color: rgba(255, 255, 255, 0.95); padding: 6px 10px; border-radius: 6px; font-size: 12px; color: #555; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    Data source: NYC Open Data
+</div>
+
+<body>
+    <div style="position: absolute; top: 10px; left: 10px; z-index: 1; background-color: rgba(255, 255, 255, 0.95); padding: 16px 20px; border-radius: 10px; width:386px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
+        <h2 style="margin: 0 0 10px 0; font-size: 20px;">Distribution of Restaurants in Manhattan</h2>
+        <p style="margin: 0 0 6px 0; font-size: 16px; line-height: 1.5;">
+            Lower and Midtown Manhattan have the highest concentration of restaurants. More WCBs (Waste Collection Boats), WCPs (Waste Collection Pods), and corresponding garages and docks should be allocated to these areas.
+        </p>
+    </div>    
+
+    <div id="map"></div>
+    <script src="script.js"></script>
+</body>
+
+<div style="position: absolute; top: 184px; left: 10px; z-index: 2;">
+    <input id="searchBox" type="text" placeholder="Search restaurant..." 
+        style="padding: 8px 12px; width: 240px; font-size: 14px; border: 1px solid #ccc; border-radius: 6px;">
+    <div id="suggestions" 
+        style="position: absolute; top: 38px; width: 240px; max-height: 200px; overflow-y: auto; background: white; border: 1px solid #ccc; border-top: none; border-radius: 0 0 6px 6px; font-size: 13px; display: none;"></div>
+</div>
+
+
+</html>
