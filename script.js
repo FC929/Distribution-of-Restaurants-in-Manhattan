@@ -112,12 +112,14 @@ async function loadRestaurants() {
             map.on('click', 'unclustered-point', (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const title = e.features[0].properties.title;
-
+                const street = e.features[0].properties.street;
+                const zipcode = e.features[0].properties.zipcode;
+            
                 new mapboxgl.Popup()
                     .setLngLat(coordinates)
-                    .setHTML(`<strong></strong> ${title}`)
+                    .setHTML(`<strong>${title}</strong><br/>${street}<br/>${zipcode}`)
                     .addTo(map);
-            });
+            });            
 
             // 鼠标悬停时改变鼠标指针形状
             map.on('mouseenter', 'unclustered-point', () => {
@@ -169,18 +171,20 @@ searchInput.addEventListener('input', function (e) {
 
         div.addEventListener('click', () => {
             const coords = match.geometry.coordinates;
-            const name = match.properties.title;
-
+            const title = match.properties.title;
+            const street = match.properties.street;
+            const zipcode = match.properties.zipcode;
+        
             map.flyTo({ center: coords, zoom: 15 });
-
+        
             new mapboxgl.Popup()
                 .setLngLat(coords)
                 .setHTML(`<strong>${title}</strong><br/>${street}<br/>${zipcode}`)
                 .addTo(map);
-
+        
             suggestionBox.style.display = 'none';
-            searchInput.value = name;
-        });
+            searchInput.value = title;
+        });        
 
         suggestionBox.appendChild(div);
     });
